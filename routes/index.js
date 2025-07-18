@@ -31,16 +31,14 @@ router.get('/', async function (req, res) {
       } else {
         // cookie is invalid, remove it and start fresh
         const newView = await views.create({
-          email: req.cookies?.token ? jwt.verify(req.cookies.token, process.env.JWT_KEY).email : 'Not Logged in',
-          visited: 1,
+            visited: 1,
           date: new Date().toISOString().split('T')[0],
         });
         res.cookie('view', newView._id);
       }
     } else {
       const newView = await views.create({
-        email: req.cookies?.token ? jwt.verify(req.cookies.token, process.env.JWT_KEY).email : 'Not Logged in',
-        visited: 1,
+         visited: 1,
         date: new Date().toISOString().split('T')[0],
       });
       res.cookie('view', newView._id);
