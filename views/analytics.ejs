@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EliteGrow | Analytics</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+</head>
+
+<body>
+    <div class="w-full">
+        <h1 class="text-center">Total Views Today : <%= totalEntries %></h1>
+    </div>
+
+    <table class="mx-auto border border-gray-300">
+        <thead class="bg-gray-100">
+            <tr>
+                <th class="px-4 py-2 border">ID</th>
+                <th class="px-4 py-2 border">Visited</th>
+                <th class="px-4 py-2 border">Device</th>
+            </tr>
+        </thead>
+        <% views.slice().reverse().forEach(function(view) { %>
+            <tbody>
+                <tr>
+                    <td class="px-4 py-2 border">
+                        <%= view._id %>
+                    </td>
+                    <td class="px-4 py-2 border">
+                        <%= view.visited %>
+                    </td>
+                    <td class="px-4 py-2 border">
+                        <%= view.deviceInfo.platform %> |
+                        <%= view.deviceInfo.userAgent %> |
+                        <%= view.deviceInfo.deviceMemory %>|
+                        <%= view.deviceInfo.language %> |
+                        <%= view.deviceInfo.cpuClass %> |
+                        <%= view.deviceInfo.hardwareConcurrency %> |
+                    </td>
+                </tr>
+            </tbody>
+            <% }); %>
+    </table>
+
+
+
+</body>
+
+</html>

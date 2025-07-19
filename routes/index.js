@@ -11,6 +11,10 @@ const storage = multer.memoryStorage();
 const upload = multer({ storage: storage });
 
 
+
+
+
+
 router.get('/', async function (req, res) {
   const items = await itemModel.find();
   let value = 0;
@@ -23,26 +27,45 @@ router.get('/', async function (req, res) {
   //     console.log("IP Address:", data.ip);
 
   //   });
- if (req.cookies?.view) {
-      const view = await views.findById(req.cookies.view);
-      if (view) {
-        view.visited++;
-        await view.save();
-      } else {
-        // cookie is invalid, remove it and start fresh
-        const newView = await views.create({
-            visited: 1,
-          date: new Date().toISOString().split('T')[0],
-        });
-        res.cookie('view', newView._id);
-      }
+
+  if (req.cookies?.view) {
+    const view = await views.findById(req.cookies.view);
+    if (view) {
+      view.visited++;
+      await view.save();
     } else {
+      const deviceInfo = {
+        userAgent: navigator.userAgent,
+        platform: navigator.platform,
+        language: navigator.language,
+        cpuClass: navigator.cpuClass || 'Unknown',
+        deviceMemory: navigator.deviceMemory || 'Unknown',
+        hardwareConcurrency: navigator.hardwareConcurrency || 'Unknown'
+      };
+      // cookie is invalid, remove it and start fresh
       const newView = await views.create({
-         visited: 1,
+        visited: 1,
         date: new Date().toISOString().split('T')[0],
+        deviceInfo: deviceInfo
       });
       res.cookie('view', newView._id);
     }
+  } else {
+    const deviceInfo = {
+      userAgent: navigator.userAgent,
+      platform: navigator.platform,
+      language: navigator.language,
+      cpuClass: navigator.cpuClass || 'Unknown',
+      deviceMemory: navigator.deviceMemory || 'Unknown',
+      hardwareConcurrency: navigator.hardwareConcurrency || 'Unknown'
+    };
+    const newView = await views.create({
+      visited: 1,
+      date: new Date().toISOString().split('T')[0],
+      deviceInfo: deviceInfo
+    });
+    res.cookie('view', newView._id);
+  }
 
   if (req.cookies?.token) {
     try {
@@ -69,8 +92,33 @@ router.get('/createItem', async function (req, res) {
 })
 
 router.post('/createItem', upload.single('itemImage'), async function (req, res) {
-  const { itemImage, itemName, itemLink } = req.body;
-  const item = await itemModel.create({
+  try {
+    const token = req.cookies.token; // Get JWT from cookies
+
+    if (!token) {
+      return res.redirect('/login'); // Redirect if no token found
+    }
+
+    // Verify token
+    const decoded = jwt.verify(token, process.env.JWT_KEY);
+
+    // Find user in database
+    const user = await User.findOne({ email: decoded.email }).select('-password');
+
+    if (!user) {
+      return res.redirect('/login?message=Please#20login%20first'); // Redirect if user is not found
+    }
+
+    // Check if user is an admin
+    if (!user.isAdmin) {
+      return res.redirect('/?message=Please%20do%20not%20try%20otherwise...'); // Redirect non-admin users to home
+    }
+  } catch (error) {
+    return res.redirect('/login?message=Invalid%20token%20or%20session%20expired'); // Redirect if token verification fails
+  }
+
+  const { itemName, itemLink } = req.body;
+  await itemModel.create({
     itemImage: req.file ? req.file.buffer : null,
     itemLink,
     itemName
@@ -85,6 +133,42 @@ router.get('/login', async function (req, res) {
 
 router.get('/register', async function (req, res) {
   res.render('register');
+});
+
+router.get('/analytics', async function (req, res) {
+   try {
+    const token = req.cookies.token; // Get JWT from cookies
+
+    if (!token) {
+      return res.redirect('/login'); // Redirect if no token found
+    }
+
+    // Verify token
+    const decoded = jwt.verify(token, process.env.JWT_KEY);
+
+    // Find user in database
+    const user = await User.findOne({ email: decoded.email }).select('-password');
+
+    if (!user) {
+      return res.redirect('/login?message=Please#20login%20first'); // Redirect if user is not found
+    }
+
+    // Check if user is an admin
+    if (!user.isAdmin) {
+      return res.redirect('/?message=Please%20do%20not%20try%20otherwise...'); // Redirect non-admin users to home
+    }
+  } catch (error) {
+    return res.redirect('/login?message=Invalid%20token%20or%20session%20expired'); // Redirect if token verification fails
+  }
+
+  const today = new Date().toISOString().split('T')[0];
+  const data = await views.find({ date: today });
+  const count = data.length; // or await views.countDocuments({ date: today })
+
+  res.render('analytics', {
+    views: data,
+    totalEntries: count
+  });
 });
 
 router.post('/auth/login', async (req, res) => {
@@ -102,12 +186,12 @@ router.post('/auth/login', async (req, res) => {
 });
 
 router.post('/auth/register', async (req, res) => {
-  const { email, password } = req.body;
+  const { name,email, password } = req.body;
   try {
     const user = await User.findOne({ email });
     if (user) return res.redirect('/register?message=Email%20already%20exists');
 
-    let useR = await User.create({ email, password });
+    let useR = await User.create({name, email, password });
     let token = generateToken(useR);
     res.cookie("token", token);
     res.redirect('/?message=Registered%20successfully');
@@ -115,5 +199,7 @@ router.post('/auth/register', async (req, res) => {
     res.redirect('/register?message=Something%20went%20wrong');
   }
 });
+
+
 
 module.exports = router;
