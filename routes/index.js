@@ -136,7 +136,7 @@ router.get('/register', async function (req, res) {
 });
 
 router.get('/analytics', async function (req, res) {
-   try {
+  try {
     const token = req.cookies.token; // Get JWT from cookies
 
     if (!token) {
@@ -178,7 +178,13 @@ router.post('/auth/login', async (req, res) => {
     if (!user) return res.status(400).send("Email not registered");
     if (user.password !== password) return res.status(401).send("Invalid password");
     let token = generateToken(user);
-    res.cookie("token", token);
+    res.cookie("token", token, {
+      maxAge: 1000 * 60 * 60 * 24 * 365 * 10, // 10 years
+      httpOnly: true,
+      sameSite: "Lax",
+      secure: true // IMPORTANT: true because Render uses HTTPS by default
+    });
+
     res.redirect('/?message=Login%20successful');
   } catch (err) {
     res.redirect('/login?message=Something%20went%20wrong');
@@ -186,14 +192,20 @@ router.post('/auth/login', async (req, res) => {
 });
 
 router.post('/auth/register', async (req, res) => {
-  const { name,email, password } = req.body;
+  const { name, email, password } = req.body;
   try {
     const user = await User.findOne({ email });
     if (user) return res.redirect('/register?message=Email%20already%20exists');
 
-    let useR = await User.create({name, email, password });
+    let useR = await User.create({ name, email, password });
     let token = generateToken(useR);
-    res.cookie("token", token);
+    res.cookie("token", token, {
+      maxAge: 1000 * 60 * 60 * 24 * 365 * 10, // 10 years
+      httpOnly: true,
+      sameSite: "Lax",
+      secure: true // IMPORTANT: true because Render uses HTTPS by default
+    });
+
     res.redirect('/?message=Registered%20successfully');
   } catch (err) {
     res.redirect('/register?message=Something%20went%20wrong');
