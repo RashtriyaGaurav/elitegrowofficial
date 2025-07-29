@@ -43,7 +43,7 @@
           <div class="flex w-[90vw] gap-10">
             <% items.slice().reverse().forEach(function(item) { %>
               <% if(item.itemPath) { %>
-                <a href="<%= item.itemPath %>"
+                <a href="<%= item.itemPath %>/<%= item._id %>"
                   class=" hover:scale-103 transition duration-300 rounded-lg overflow-hidden flex flex-col">
                   <div class="h-45 overflow-hidden">
                     <img class="h-full w-full object-cover"
@@ -56,7 +56,7 @@
                   </div>
                 </a>
                 <% } else { %>
-                  <a href="<%= item.itemLink %>" target="_blank"
+                  <a href="item/<%= item._id %>" target="_blank"
                     class=" hover:scale-103 transition duration-300 rounded-lg overflow-hidden flex flex-col">
                     <div class="h-45 overflow-hidden">
                       <img class="h-full w-full object-cover"

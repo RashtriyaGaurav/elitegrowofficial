@@ -91,8 +91,24 @@ router.get('/createItem', async function (req, res) {
   res.render('createItem');
 })
 
-router.get('/capcutapk', async function (req, res) {
+router.get('/capcutapk/:id', async function (req, res) {
+  const itemId = req.params.id;
+  await itemModel.findOneAndUpdate(
+    { _id: itemId },
+    { $inc: { clicks: 1 } }
+  );
   res.render('capcut');
+})
+
+router.get('/item/:id', async function (req, res) {
+  const itemId = req.params.id;
+  let item = await itemModel.findOne({ _id: itemId });
+  await itemModel.findOneAndUpdate(
+    { _id: itemId },
+    { $inc: { clicks: 1 } }
+  );
+
+  res.redirect(item.itemLink);
 })
 
 router.post('/createItem', upload.single('itemImage'), async function (req, res) {
@@ -121,7 +137,7 @@ router.post('/createItem', upload.single('itemImage'), async function (req, res)
     return res.redirect('/login?message=Invalid%20token%20or%20session%20expired'); // Redirect if token verification fails
   }
 
-  const { itemName, itemLink ,itemPath } = req.body;
+  const { itemName, itemLink, itemPath } = req.body;
   await itemModel.create({
     itemImage: req.file ? req.file.buffer : null,
     itemLink,
