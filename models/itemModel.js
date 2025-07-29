@@ -4,7 +4,9 @@ mongoose.connect(`${process.env.MONGODB_URI}/EliteGrow`)
 const itemSchema = mongoose.Schema({
     itemImage: Buffer,
     itemName: String,
-    itemLink: String
+    itemLink: String,
+    clicks:Number,
+    itemPath:String
 });
 
 module.exports = mongoose.model('item', itemSchema);

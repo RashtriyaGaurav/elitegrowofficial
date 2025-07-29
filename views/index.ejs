@@ -11,6 +11,15 @@
 
 <body>
 
+  <a href="/helpchat" class="fixed bottom-10 right-10 bg-blue-600 p-4 text-white rounded-2xl border border-zinc-800 shadow-blue-600 shadow-lg hover:scale-105 transition duration-200">
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+      class="size-8">
+      <path stroke-linecap="round" stroke-linejoin="round"
+        d="M8.625 9.75a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm0 0H8.25m4.125 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm0 0H12m4.125 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm0 0h-.375m-13.5 3.01c0 1.6 1.123 2.994 2.707 3.227 1.087.16 2.185.283 3.293.369V21l4.184-4.183a1.14 1.14 0 0 1 .778-.332 48.294 48.294 0 0 0 5.83-.498c1.585-.233 2.708-1.626 2.708-3.228V6.741c0-1.602-1.123-2.995-2.707-3.228A48.394 48.394 0 0 0 12 3c-2.392 0-4.744.175-7.043.513C3.373 3.746 2.25 5.14 2.25 6.741v6.018Z" />
+    </svg>
+
+  </a>
+
   <% if (value==0) { %>
     <div class="flex fixed w-full p-4 items-center justify-end">
       <a href="/login"
@@ -33,19 +42,34 @@
 
           <div class="flex w-[90vw] gap-10">
             <% items.slice().reverse().forEach(function(item) { %>
-              <a href="<%= item.itemLink %>" target="_blank"
-                class=" hover:scale-103 transition duration-300 rounded-md overflow-hidden flex flex-col">
-                <div class="h-45 overflow-hidden">
-                  <img class="h-full w-full object-cover"
-                    src="data:image/jpeg;base64,<%= item.itemImage.toString('base64') %>" alt="">
-                </div>
-                <div class="flex bg-zinc-200 flex-col pb-2 px-2 pt-1">
-                  <h1 class="text-xl font-semibold">
-                    <%= item.itemName %>
-                  </h1>
-                </div>
-              </a>
-              <% }); %>
+              <% if(item.itemPath) { %>
+                <a href="<%= item.itemPath %>"
+                  class=" hover:scale-103 transition duration-300 rounded-lg overflow-hidden flex flex-col">
+                  <div class="h-45 overflow-hidden">
+                    <img class="h-full w-full object-cover"
+                      src="data:image/jpeg;base64,<%= item.itemImage.toString('base64') %>" alt="">
+                  </div>
+                  <div class="flex bg-zinc-900/10 flex-col pb-2 px-2 pt-1">
+                    <h1 class="text-xl font-semibold">
+                      <%= item.itemName %>
+                    </h1>
+                  </div>
+                </a>
+                <% } else { %>
+                  <a href="<%= item.itemLink %>" target="_blank"
+                    class=" hover:scale-103 transition duration-300 rounded-lg overflow-hidden flex flex-col">
+                    <div class="h-45 overflow-hidden">
+                      <img class="h-full w-full object-cover"
+                        src="data:image/jpeg;base64,<%= item.itemImage.toString('base64') %>" alt="">
+                    </div>
+                    <div class="flex bg-zinc-900/10 flex-col pb-2 px-2 pt-1">
+                      <h1 class="text-xl font-semibold">
+                        <%= item.itemName %>
+                      </h1>
+                    </div>
+                  </a>
+                  <% } %>
+                    <% }); %>
           </div>
 
 

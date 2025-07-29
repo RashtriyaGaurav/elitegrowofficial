@@ -91,6 +91,10 @@ router.get('/createItem', async function (req, res) {
   res.render('createItem');
 })
 
+router.get('/capcutapk', async function (req, res) {
+  res.render('capcut');
+})
+
 router.post('/createItem', upload.single('itemImage'), async function (req, res) {
   try {
     const token = req.cookies.token; // Get JWT from cookies
@@ -117,11 +121,12 @@ router.post('/createItem', upload.single('itemImage'), async function (req, res)
     return res.redirect('/login?message=Invalid%20token%20or%20session%20expired'); // Redirect if token verification fails
   }
 
-  const { itemName, itemLink } = req.body;
+  const { itemName, itemLink ,itemPath } = req.body;
   await itemModel.create({
     itemImage: req.file ? req.file.buffer : null,
     itemLink,
-    itemName
+    itemName,
+    itemPath
 
   });
   res.redirect('/createItem');
@@ -129,6 +134,10 @@ router.post('/createItem', upload.single('itemImage'), async function (req, res)
 
 router.get('/login', async function (req, res) {
   res.render('login');
+});
+
+router.get('/helpchat', async function (req, res) {
+  res.render('helpchat');
 });
 
 router.get('/register', async function (req, res) {
