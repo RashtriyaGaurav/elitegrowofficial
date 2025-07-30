@@ -11,7 +11,8 @@
 
 <body>
 
-  <a href="/helpchat" class="fixed bottom-10 right-10 bg-blue-600 p-4 text-white rounded-2xl border border-zinc-800 shadow-blue-600 shadow-lg hover:scale-105 transition duration-200">
+  <a href="/helpchat"
+    class="fixed bottom-10 right-10 bg-blue-600 p-4 text-white rounded-2xl border border-zinc-800 shadow-blue-600 shadow-lg hover:scale-105 transition duration-200">
     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
       class="size-8">
       <path stroke-linecap="round" stroke-linejoin="round"
@@ -34,36 +35,38 @@
           <span id="messageText"></span>
         </div>
 
-        <div class="flex items-center justify-center py-20">
+        <div class="flex items-center justify-center py-10">
           <h1 class="text-[15vw] font-semibold">EliteGrow</h1>
         </div>
 
+         
+
         <div class="flex justify-center mb-20">
 
-          <div class="flex w-[90vw] gap-10">
+          <div class="flex flex-wrap justify-center gap-6 sm:gap-8 md:gap-10 w-full px-4">
             <% items.slice().reverse().forEach(function(item) { %>
               <% if(item.itemPath) { %>
                 <a href="<%= item.itemPath %>/<%= item._id %>"
-                  class=" hover:scale-103 transition duration-300 rounded-lg overflow-hidden flex flex-col">
-                  <div class="h-45 overflow-hidden">
-                    <img class="h-full w-full object-cover"
+                  class="w-full sm:w-[48%] md:w-[30%] lg:w-[22%] hover:scale-105 transition duration-300 rounded-lg overflow-hidden flex flex-col bg-zinc-900/10">
+                  <div class="aspect-video overflow-hidden">
+                    <img class="w-full h-full object-cover"
                       src="data:image/jpeg;base64,<%= item.itemImage.toString('base64') %>" alt="">
                   </div>
-                  <div class="flex bg-zinc-900/10 flex-col pb-2 px-2 pt-1">
-                    <h1 class="text-xl font-semibold">
+                  <div class="flex flex-col pb-2 px-2 pt-1">
+                    <h1 class="text-lg sm:text-xl font-semibold">
                       <%= item.itemName %>
                     </h1>
                   </div>
                 </a>
                 <% } else { %>
                   <a href="item/<%= item._id %>" target="_blank"
-                    class=" hover:scale-103 transition duration-300 rounded-lg overflow-hidden flex flex-col">
-                    <div class="h-45 overflow-hidden">
-                      <img class="h-full w-full object-cover"
+                    class="w-full sm:w-[48%] md:w-[30%] lg:w-[22%] hover:scale-105 transition duration-300 rounded-lg overflow-hidden flex flex-col bg-zinc-900/10">
+                    <div class="aspect-video overflow-hidden">
+                      <img class="w-full h-full object-cover"
                         src="data:image/jpeg;base64,<%= item.itemImage.toString('base64') %>" alt="">
                     </div>
-                    <div class="flex bg-zinc-900/10 flex-col pb-2 px-2 pt-1">
-                      <h1 class="text-xl font-semibold">
+                    <div class="flex flex-col pb-2 px-2 pt-1">
+                      <h1 class="text-lg sm:text-xl font-semibold">
                         <%= item.itemName %>
                       </h1>
                     </div>
@@ -71,6 +74,7 @@
                   <% } %>
                     <% }); %>
           </div>
+
 
 
         </div>

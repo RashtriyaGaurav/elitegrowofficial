@@ -19,53 +19,46 @@ router.get('/', async function (req, res) {
   const items = await itemModel.find();
   let value = 0;
 
-  //  fetch("https://ipapi.co/json/")
-  //   .then(res => res.json())
-  //   .then(data => {
-  //     console.log("Country:", data.country_name);
-  //     console.log("City:", data.city);
-  //     console.log("IP Address:", data.ip);
+ 
 
+  // if (req.cookies?.view) {
+  //   const view = await views.findById(req.cookies.view);
+  //   if (view) {
+  //     view.visited++;
+  //     await view.save();
+  //   } else {
+  //     const deviceInfo = {
+  //       userAgent: navigator.userAgent,
+  //       platform: navigator.platform,
+  //       language: navigator.language,
+  //       cpuClass: navigator.cpuClass || 'Unknown',
+  //       deviceMemory: navigator.deviceMemory || 'Unknown',
+  //       hardwareConcurrency: navigator.hardwareConcurrency || 'Unknown'
+  //     };
+  //     // cookie is invalid, remove it and start fresh
+  //     const newView = await views.create({
+  //       visited: 1,
+  //       date: new Date().toISOString().split('T')[0],
+  //       deviceInfo: deviceInfo
+  //     });
+  //     res.cookie('view', newView._id);
+  //   }
+  // } else {
+  //   const deviceInfo = {
+  //     userAgent: navigator.userAgent,
+  //     platform: navigator.platform,
+  //     language: navigator.language,
+  //     cpuClass: navigator.cpuClass || 'Unknown',
+  //     deviceMemory: navigator.deviceMemory || 'Unknown',
+  //     hardwareConcurrency: navigator.hardwareConcurrency || 'Unknown'
+  //   };
+  //   const newView = await views.create({
+  //     visited: 1,
+  //     date: new Date().toISOString().split('T')[0],
+  //     deviceInfo: deviceInfo
   //   });
-
-  if (req.cookies?.view) {
-    const view = await views.findById(req.cookies.view);
-    if (view) {
-      view.visited++;
-      await view.save();
-    } else {
-      const deviceInfo = {
-        userAgent: navigator.userAgent,
-        platform: navigator.platform,
-        language: navigator.language,
-        cpuClass: navigator.cpuClass || 'Unknown',
-        deviceMemory: navigator.deviceMemory || 'Unknown',
-        hardwareConcurrency: navigator.hardwareConcurrency || 'Unknown'
-      };
-      // cookie is invalid, remove it and start fresh
-      const newView = await views.create({
-        visited: 1,
-        date: new Date().toISOString().split('T')[0],
-        deviceInfo: deviceInfo
-      });
-      res.cookie('view', newView._id);
-    }
-  } else {
-    const deviceInfo = {
-      userAgent: navigator.userAgent,
-      platform: navigator.platform,
-      language: navigator.language,
-      cpuClass: navigator.cpuClass || 'Unknown',
-      deviceMemory: navigator.deviceMemory || 'Unknown',
-      hardwareConcurrency: navigator.hardwareConcurrency || 'Unknown'
-    };
-    const newView = await views.create({
-      visited: 1,
-      date: new Date().toISOString().split('T')[0],
-      deviceInfo: deviceInfo
-    });
-    res.cookie('view', newView._id);
-  }
+  //   res.cookie('view', newView._id);
+  // }
 
   if (req.cookies?.token) {
     try {
@@ -186,14 +179,9 @@ router.get('/analytics', async function (req, res) {
     return res.redirect('/login?message=Invalid%20token%20or%20session%20expired'); // Redirect if token verification fails
   }
 
-  const today = new Date().toISOString().split('T')[0];
-  const data = await views.find({ date: today });
-  const count = data.length; // or await views.countDocuments({ date: today })
+  const items = await itemModel.find();
 
-  res.render('analytics', {
-    views: data,
-    totalEntries: count
-  });
+  res.render('analytics', {items});
 });
 
 router.post('/auth/login', async (req, res) => {

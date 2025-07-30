@@ -9,41 +9,54 @@
 </head>
 
 <body>
-    <div class="w-full">
-        <h1 class="text-center">Total Views Today : <%= totalEntries %></h1>
+
+    <div class="flex items-center justify-center py-5">
+        <h1 class="text-[10vw] font-semibold">Analytics</h1>
     </div>
 
-    <table class="mx-auto border border-gray-300">
-        <thead class="bg-gray-100">
-            <tr>
-                <th class="px-4 py-2 border">ID</th>
-                <th class="px-4 py-2 border">Visited</th>
-                <th class="px-4 py-2 border">Device</th>
-            </tr>
-        </thead>
-        <% views.slice().reverse().forEach(function(view) { %>
-            <tbody>
-                <tr>
-                    <td class="px-4 py-2 border">
-                        <%= view._id %>
-                    </td>
-                    <td class="px-4 py-2 border">
-                        <%= view.visited %>
-                    </td>
-                    <td class="px-4 py-2 border">
-                        <%= view.deviceInfo.platform %> |
-                        <%= view.deviceInfo.userAgent %> |
-                        <%= view.deviceInfo.deviceMemory %>|
-                        <%= view.deviceInfo.language %> |
-                        <%= view.deviceInfo.cpuClass %> |
-                        <%= view.deviceInfo.hardwareConcurrency %> |
-                    </td>
-                </tr>
-            </tbody>
-            <% }); %>
-    </table>
+    <div class="flex justify-center mb-20">
+
+        <div class="flex flex-wrap justify-center gap-6 sm:gap-8 md:gap-10 w-full px-4">
+            <% items.slice().reverse().forEach(function(item) { %>
+                <% if(item.itemPath) { %>
+                    <a href="<%= item.itemPath %>/<%= item._id %>"
+                        class="w-full sm:w-[48%] md:w-[30%] lg:w-[22%] hover:scale-105 transition duration-300 rounded-lg overflow-hidden flex flex-col bg-zinc-900/10">
+                        <div class="aspect-video overflow-hidden">
+                            <img class="w-full h-full object-cover"
+                                src="data:image/jpeg;base64,<%= item.itemImage.toString('base64') %>" alt="">
+                        </div>
+                        <div class="flex flex-col pb-2 px-2 pt-1">
+                            <h1 class="text-lg sm:text-xl font-semibold">
+                                <%= item.itemName %>
+                            </h1>
+                             <h1 class="text-lg  sm:text-xl text-green-700">
+                                    Clicks : <%= item.clicks %>
+                                </h1>
+                        </div>
+                    </a>
+                    <% } else { %>
+                        <a href="item/<%= item._id %>" target="_blank"
+                            class="w-full sm:w-[48%] md:w-[30%] lg:w-[22%] hover:scale-105 transition duration-300 rounded-lg overflow-hidden flex flex-col bg-zinc-900/10">
+                            <div class="aspect-video overflow-hidden">
+                                <img class="w-full h-full object-cover"
+                                    src="data:image/jpeg;base64,<%= item.itemImage.toString('base64') %>" alt="">
+                            </div>
+                            <div class="flex flex-col pb-2 px-2 pt-1">
+                                <h1 class="text-lg sm:text-xl font-semibold">
+                                    <%= item.itemName %>
+                                </h1>
+                                <h1 class="text-lg  sm:text-xl text-green-700">
+                                    Clicks : <%= item.clicks %>
+                                </h1>
+                            </div>
+                        </a>
+                        <% } %>
+                            <% }); %>
+        </div>
 
 
+
+    </div>
 
 </body>
 
