@@ -40,7 +40,9 @@
       <a href="/login" class="text-blue-500 underline hover:text-blue-700">login</a>
     </p>
 
-    <script>
+     <script src="/socket.io/socket.io.js"></script>
+  <script>
+    const socket = io();
        const urlParams = new URLSearchParams(window.location.search);
     const message = urlParams.get('message');
 

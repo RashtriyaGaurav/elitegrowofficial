@@ -2,62 +2,198 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EliteGrow | Analytics</title>
-    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>EliteGrow | Analytics</title>
+
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Google+Sans+Code:wght@400;700&display=swap');
+
+    body::-webkit-scrollbar {
+      display: none;
+    }
+  </style>
 </head>
 
-<body>
-
-    <div class="flex items-center justify-center py-5">
-        <h1 class="text-[10vw] font-semibold">Analytics</h1>
+<body class="bg-zinc-900 text-white">
+  <div class="flex">
+    <!-- Sidebar -->
+    <div class="min-h-screen w-[20vw] bg-black/30 p-4">
+      <a style="font-family: 'Google Sans Code';" href="/" class="text-2xl block mb-6">
+        Elite<span class="text-blue-500">Grow</span>
+      </a>
+      <nav class="flex flex-col gap-4">
+        <button onclick="showSection('Dashboard')" class="hover:bg-blue-500 px-3 py-1 rounded-xl text-left text-xl transition duration-200">Dashboard</button>
+        <button onclick="showTraffic()" class="hover:bg-blue-500 px-3 py-1 rounded-xl text-left text-xl transition duration-200">Traffic</button>
+        <button onclick="showSection('clicks')" class="hover:bg-blue-500 px-3 py-1 rounded-xl text-left text-xl transition duration-200">Clicks</button>
+      </nav>
     </div>
 
-    <div class="flex justify-center mb-20">
+    <!-- Main Content -->
+    <div class="min-h-screen w-[80vw] p-5">
 
-        <div class="flex flex-wrap justify-center gap-6 sm:gap-8 md:gap-10 w-full px-4">
-            <% items.slice().reverse().forEach(function(item) { %>
-                <% if(item.itemPath) { %>
-                    <a href="<%= item.itemPath %>/<%= item._id %>"
-                        class="w-full sm:w-[48%] md:w-[30%] lg:w-[22%] hover:scale-105 transition duration-300 rounded-lg overflow-hidden flex flex-col bg-zinc-900/10">
-                        <div class="aspect-video overflow-hidden">
-                            <img class="w-full h-full object-cover"
-                                src="data:image/jpeg;base64,<%= item.itemImage.toString('base64') %>" alt="">
-                        </div>
-                        <div class="flex flex-col pb-2 px-2 pt-1">
-                            <h1 class="text-lg sm:text-xl font-semibold">
-                                <%= item.itemName %>
-                            </h1>
-                             <h1 class="text-lg  sm:text-xl text-green-700">
-                                    Clicks : <%= item.clicks %>
-                                </h1>
-                        </div>
-                    </a>
-                    <% } else { %>
-                        <a href="item/<%= item._id %>" target="_blank"
-                            class="w-full sm:w-[48%] md:w-[30%] lg:w-[22%] hover:scale-105 transition duration-300 rounded-lg overflow-hidden flex flex-col bg-zinc-900/10">
-                            <div class="aspect-video overflow-hidden">
-                                <img class="w-full h-full object-cover"
-                                    src="data:image/jpeg;base64,<%= item.itemImage.toString('base64') %>" alt="">
-                            </div>
-                            <div class="flex flex-col pb-2 px-2 pt-1">
-                                <h1 class="text-lg sm:text-xl font-semibold">
-                                    <%= item.itemName %>
-                                </h1>
-                                <h1 class="text-lg  sm:text-xl text-green-700">
-                                    Clicks : <%= item.clicks %>
-                                </h1>
-                            </div>
-                        </a>
-                        <% } %>
-                            <% }); %>
+      <!-- Dashboard -->
+      <div id="Dashboard" class="section gap-5 flex">
+        <div class="w-[60%] rounded-2xl h-[50vh] flex gap-4 flex-col">
+          <div class="h-[50%] w-full rounded-2xl flex gap-4">
+            <!-- Total Users -->
+            <div class="h-full w-[50%] bg-zinc-800 rounded-2xl p-5 flex items-start flex-col justify-end">
+              <div class="bg-green-600/30 p-3 rounded-xl mb-2">
+                <svg xmlns="http://www.w3.org/2000/svg" class="size-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                    d="M18 18.72a9.094 9.094 0 0 0 3.741-.479 3 3 0 0 0-4.682-2.72M15 6.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+                </svg>
+              </div>
+              <h1 class="text-zinc-200">Total Users</h1>
+              <h1 class="text-zinc-100 font-semibold text-2xl">47854</h1>
+            </div>
+
+            <!-- Total Clicks -->
+            <div class="h-full w-[50%] bg-zinc-800 rounded-2xl p-5 flex items-start flex-col justify-end">
+              <div class="bg-green-600/30 p-3 rounded-xl mb-2">
+                <svg xmlns="http://www.w3.org/2000/svg" class="size-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                    d="M2.25 18 9 11.25l4.306 4.306a11.95 11.95 0 0 1 5.814-5.518" />
+                </svg>
+              </div>
+              <h1 class="text-zinc-200">Total Clicks</h1>
+              <h1 class="text-zinc-100 font-semibold text-2xl">478546</h1>
+            </div>
+          </div>
+          <div class="h-[50%] bg-zinc-800 w-full rounded-2xl p-5 flex"></div>
         </div>
 
+        <!-- Live Users Chart -->
+        <div class="w-[40%] bg-zinc-800 rounded-2xl h-[50vh] p-5 flex flex-col justify-between">
+          <h2 class="text-zinc-200">Live Users Trend</h2>
+          <h1 id="activeUserCount" class="text-zinc-100 font-semibold text-2xl mb-2">0</h1>
+          <canvas id="activeUsersChart" class="w-full h-full"></canvas>
+        </div>
+      </div>
 
+      <!-- Traffic -->
+      <div id="traffic" class="section hidden">
+        <h2 class="text-3xl font-bold mb-4">Traffic</h2>
+        <p class="mb-4">Here we show charts of site traffic analytics.</p>
+        <div id="trafficChart" class="w-full h-[400px] rounded-xl shadow p-4"></div>
+      </div>
 
+      <!-- Clicks -->
+      <div id="clicks" class="section hidden">
+        <h2 class="text-3xl font-bold mb-4">Clicks</h2>
+        <p>This section tracks user clicks across your site.</p>
+      </div>
     </div>
+  </div>
 
+  <script src="/socket.io/socket.io.js"></script>
+  <script>
+    const socket = io();
+    const activeUserEl = document.getElementById('activeUserCount');
+
+    const ctx = document.getElementById('activeUsersChart').getContext('2d');
+    const activeUsersChart = new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels: [],
+        datasets: [{
+          label: 'Live Users',
+          data: [],
+          borderColor: '#22c55e',
+          backgroundColor: 'rgba(34, 197, 94, 0.2)',
+          tension: 0.4,
+          pointRadius: 2
+        }]
+      },
+      options: {
+        animation: false,
+        responsive: true,
+        plugins: {
+          legend: { labels: { color: 'white' } }
+        },
+        scales: {
+          x: {
+            ticks: { color: 'white' },
+            grid: { color: 'rgba(255,255,255,0.1)' }
+          },
+          y: {
+            beginAtZero: true,
+            ticks: { color: 'white' },
+            grid: { color: 'rgba(255,255,255,0.1)' }
+          }
+        }
+      }
+    });
+
+    socket.on('updateActiveUsers', function (count) {
+      const now = new Date().toLocaleTimeString();
+      if (activeUserEl) activeUserEl.innerText = count;
+
+      if (activeUsersChart.data.labels.length >= 20) {
+        activeUsersChart.data.labels.shift();
+        activeUsersChart.data.datasets[0].data.shift();
+      }
+
+      activeUsersChart.data.labels.push(now);
+      activeUsersChart.data.datasets[0].data.push(count);
+      activeUsersChart.update();
+    });
+
+    // General section display handler
+    function showSection(id) {
+      document.querySelectorAll('.section').forEach(section => {
+        section.classList.add('hidden');
+      });
+      document.getElementById(id).classList.remove('hidden');
+    }
+
+    // Specific for traffic section (calls data load)
+    function showTraffic() {
+      showSection('traffic');
+      if (!document.querySelector("#trafficChart").innerHTML.trim()) {
+        loadTrafficChart();
+      }
+    }
+
+    // Load ApexCharts for traffic data
+    async function loadTrafficChart() {
+      try {
+        const res = await fetch('/analytics/traffic-data');
+        const data = await res.json();
+
+        const formattedData = data.map(d => ({
+          x: new Date(d.timestamp).toLocaleTimeString(),
+          y: d.count
+        }));
+
+        const options = {
+          chart: { type: 'area', height: 350, toolbar: { show: false }, foreColor: '#333' },
+          series: [{ name: 'Active Users', data: formattedData }],
+          xaxis: { type: 'category', title: { text: 'Time' } },
+          yaxis: { title: { text: 'Users' }, min: 0 },
+          stroke: { curve: 'smooth' },
+          tooltip: {
+            x: { format: 'HH:mm:ss' }
+          },
+          colors: ['#22c55e']
+        };
+
+        const chart = new ApexCharts(document.querySelector("#trafficChart"), options);
+        chart.render();
+      } catch (err) {
+        console.error('Failed to load traffic chart', err);
+      }
+    }
+
+    // Show Dashboard by default
+    window.addEventListener('DOMContentLoaded', () => {
+      showSection('Dashboard');
+    });
+  </script>
 </body>
 
 </html>

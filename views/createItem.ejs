@@ -54,7 +54,9 @@
     </form>
   </main>
 
+   <script src="/socket.io/socket.io.js"></script>
   <script>
+    const socket = io();
     function previewImage(event) {
       const input = event.target;
       const preview = document.getElementById("profilePreview");
