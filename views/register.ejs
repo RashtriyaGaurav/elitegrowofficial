@@ -16,7 +16,7 @@
 
     <h2 class="text-3xl font-bold  mb-6 text-left">Register</h2>
 
-    <form class="space-y-4" action="/auth/register" method="POST">
+    <form class="space-y-4" action="/auth/form/register" method="POST">
       <div>
         <label class="block mb-1 mx-1 text-sm" for="email">Name</label>
         <input id="text" type="text" name="name" class="text-black w-full px-4 py-2 rounded-lg bg-zinc-100 border border-black/10 placeholder-black/10 focus:outline-none focus:ring-2 focus:ring-white" placeholder="Tung Tung Sahur" required>
@@ -37,7 +37,7 @@
     </form>
 
     <p class="text-center text-sm mt-4">Already have an account?
-      <a href="/login" class="text-blue-500 underline hover:text-blue-700">login</a>
+      <a href="/auth/login" class="text-blue-500 underline hover:text-blue-700">login</a>
     </p>
 
      <script src="/socket.io/socket.io.js"></script>

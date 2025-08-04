@@ -52,7 +52,7 @@
 
     <p class="text-center text-sm mt-6 text-zinc-300">
       Don’t have an account?
-      <a href="/register" class="text-blue-500 hover:underline">Create one</a>
+      <a href="/auth/register" class="text-blue-500 hover:underline">Create one</a>
     </p>
   </div>
 
@@ -70,7 +70,7 @@
       const email = document.getElementById("email").value.trim();
       const password = document.getElementById("password").value;
 
-      const res = await fetch("/auth/login", {
+      const res = await fetch("/auth/form/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, password }),

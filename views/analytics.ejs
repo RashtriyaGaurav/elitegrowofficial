@@ -26,10 +26,10 @@
       <a style="font-family: 'Google Sans Code';" href="/" class="text-2xl block mb-6">
         Elite<span class="text-blue-500">Grow</span>
       </a>
-      <nav class="flex flex-col gap-4">
-        <button onclick="showSection('Dashboard')" class="hover:bg-blue-500 px-3 py-1 rounded-xl text-left text-xl transition duration-200">Dashboard</button>
-        <button onclick="showTraffic()" class="hover:bg-blue-500 px-3 py-1 rounded-xl text-left text-xl transition duration-200">Traffic</button>
-        <button onclick="showSection('clicks')" class="hover:bg-blue-500 px-3 py-1 rounded-xl text-left text-xl transition duration-200">Clicks</button>
+      <nav class="flex flex-col gap-1">
+        <button onclick="showSection('Dashboard')" class="hover:bg-zinc-800 px-3 py-1 rounded-md text-left text-xl transition duration-200">Dashboard</button>
+        <button onclick="showSection('users')" class="hover:bg-zinc-800 px-3 py-1 rounded-md text-left text-xl transition duration-200">Users</button>
+        <button onclick="showSection('assets')" class="hover:bg-zinc-800 px-3 py-1 rounded-md text-left text-xl transition duration-200">Assets</button>
       </nav>
     </div>
 
@@ -43,13 +43,13 @@
             <!-- Total Users -->
             <div class="h-full w-[50%] bg-zinc-800 rounded-2xl p-5 flex items-start flex-col justify-end">
               <div class="bg-green-600/30 p-3 rounded-xl mb-2">
-                <svg xmlns="http://www.w3.org/2000/svg" class="size-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
-                    d="M18 18.72a9.094 9.094 0 0 0 3.741-.479 3 3 0 0 0-4.682-2.72M15 6.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
-                </svg>
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M18 18.72a9.094 9.094 0 0 0 3.741-.479 3 3 0 0 0-4.682-2.72m.94 3.198.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0 1 12 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 0 1 6 18.719m12 0a5.971 5.971 0 0 0-.941-3.197m0 0A5.995 5.995 0 0 0 12 12.75a5.995 5.995 0 0 0-5.058 2.772m0 0a3 3 0 0 0-4.681 2.72 8.986 8.986 0 0 0 3.74.477m.94-3.197a5.971 5.971 0 0 0-.94 3.197M15 6.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Zm6 3a2.25 2.25 0 1 1-4.5 0 2.25 2.25 0 0 1 4.5 0Zm-13.5 0a2.25 2.25 0 1 1-4.5 0 2.25 2.25 0 0 1 4.5 0Z" />
+</svg>
+
               </div>
               <h1 class="text-zinc-200">Total Users</h1>
-              <h1 class="text-zinc-100 font-semibold text-2xl">47854</h1>
+              <h1 class="text-zinc-100 font-semibold text-2xl"><%=totalUsers %></h1>
             </div>
 
             <!-- Total Clicks -->
@@ -61,7 +61,7 @@
                 </svg>
               </div>
               <h1 class="text-zinc-200">Total Clicks</h1>
-              <h1 class="text-zinc-100 font-semibold text-2xl">478546</h1>
+              <h1 class="text-zinc-100 font-semibold text-2xl"><%= totalClicks %></h1>
             </div>
           </div>
           <div class="h-[50%] bg-zinc-800 w-full rounded-2xl p-5 flex"></div>
@@ -75,125 +75,124 @@
         </div>
       </div>
 
-      <!-- Traffic -->
-      <div id="traffic" class="section hidden">
-        <h2 class="text-3xl font-bold mb-4">Traffic</h2>
-        <p class="mb-4">Here we show charts of site traffic analytics.</p>
-        <div id="trafficChart" class="w-full h-[400px] rounded-xl shadow p-4"></div>
-      </div>
+      <!-- users -->
+      <!-- users -->
+<div id="users" class="section hidden">
+  <h2 class="text-3xl font-bold mb-4">All Users</h2>
+  <p class="mb-4">List of all registered users and their details.</p>
+
+  <div class="relative overflow-x-auto sm:rounded-md">
+    <table class="w-full text-sm text-left rtl:text-right  text-zinc-200">
+      <thead class="text-xs uppercase bg-green-600/40 text-zinc-200">
+        <tr>
+          <th scope="col" class="px-6 py-3">Name</th>
+          <th scope="col" class="px-6 py-3">Email</th>
+          <th scope="col" class="px-6 py-3">Role</th>
+          <th scope="col" class="px-6 py-3">Status</th>
+          <th scope="col" class="px-6 py-3">Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% users.forEach(user => { %>
+        <tr class=" odd:bg-zinc-800 even:bg-zinc-800/40">
+          <td class="px-6 py-4 font-medium whitespace-nowrap text-zinc-200">
+            <%= user.name %>
+          </td>
+          <td class="px-6 py-4"><%= user.email %></td>
+          <td class="px-6 py-4 capitalize"><%= user.isAdmin %></td>
+          <td class="px-6 py-4">
+            <% if(user.isActive) { %>
+              <span class="bg-green-500/20 text-green-400 text-xs font-medium px-2.5 py-0.5 rounded">Active</span>
+            <% } else { %>
+              <span class="bg-red-500/20 text-red-400 text-xs font-medium px-2.5 py-0.5 rounded">Inactive</span>
+            <% } %>
+          </td>
+          <td class="px-6 py-4">
+            <a href="/admin/user/<%= user._id %>" class="text-green-500 hover:underline">View</a>
+          </td>
+        </tr>
+        <% }) %>
+      </tbody>
+    </table>
+  </div>
+</div>
+
 
       <!-- Clicks -->
-      <div id="clicks" class="section hidden">
+      <div id="assets" class="section hidden">
         <h2 class="text-3xl font-bold mb-4">Clicks</h2>
         <p>This section tracks user clicks across your site.</p>
       </div>
     </div>
   </div>
 
-  <script src="/socket.io/socket.io.js"></script>
-  <script>
-    const socket = io();
-    const activeUserEl = document.getElementById('activeUserCount');
+<script src="/socket.io/socket.io.js"></script>
+<script>
+  const socket = io();
+  const activeUserEl = document.getElementById('activeUserCount');
 
-    const ctx = document.getElementById('activeUsersChart').getContext('2d');
-    const activeUsersChart = new Chart(ctx, {
-      type: 'line',
-      data: {
-        labels: [],
-        datasets: [{
-          label: 'Live Users',
-          data: [],
-          borderColor: '#22c55e',
-          backgroundColor: 'rgba(34, 197, 94, 0.2)',
-          tension: 0.4,
-          pointRadius: 2
-        }]
+  const ctx = document.getElementById('activeUsersChart').getContext('2d');
+  const activeUsersChart = new Chart(ctx, {
+    type: 'line',
+    data: {
+      labels: [],
+      datasets: [{
+        label: 'Live Users',
+        data: [],
+        borderColor: '#22c55e',
+        backgroundColor: 'rgba(34, 197, 94, 0.2)',
+        tension: 0.4,
+        pointRadius: 2
+      }]
+    },
+    options: {
+      animation: false,
+      responsive: true,
+      plugins: {
+        legend: { labels: { color: 'white' } }
       },
-      options: {
-        animation: false,
-        responsive: true,
-        plugins: {
-          legend: { labels: { color: 'white' } }
+      scales: {
+        x: {
+          ticks: { color: 'white' },
+          grid: { color: 'rgba(255,255,255,0.1)' }
         },
-        scales: {
-          x: {
-            ticks: { color: 'white' },
-            grid: { color: 'rgba(255,255,255,0.1)' }
-          },
-          y: {
-            beginAtZero: true,
-            ticks: { color: 'white' },
-            grid: { color: 'rgba(255,255,255,0.1)' }
-          }
+        y: {
+          beginAtZero: true,
+          ticks: { color: 'white' },
+          grid: { color: 'rgba(255,255,255,0.1)' }
         }
       }
-    });
+    }
+  });
 
-    socket.on('updateActiveUsers', function (count) {
-      const now = new Date().toLocaleTimeString();
-      if (activeUserEl) activeUserEl.innerText = count;
+  socket.on('updateActiveUsers', function (count) {
+    const now = new Date().toLocaleTimeString();
+    if (activeUserEl) activeUserEl.innerText = count;
 
-      if (activeUsersChart.data.labels.length >= 20) {
-        activeUsersChart.data.labels.shift();
-        activeUsersChart.data.datasets[0].data.shift();
-      }
-
-      activeUsersChart.data.labels.push(now);
-      activeUsersChart.data.datasets[0].data.push(count);
-      activeUsersChart.update();
-    });
-
-    // General section display handler
-    function showSection(id) {
-      document.querySelectorAll('.section').forEach(section => {
-        section.classList.add('hidden');
-      });
-      document.getElementById(id).classList.remove('hidden');
+    if (activeUsersChart.data.labels.length >= 20) {
+      activeUsersChart.data.labels.shift();
+      activeUsersChart.data.datasets[0].data.shift();
     }
 
-    // Specific for traffic section (calls data load)
-    function showTraffic() {
-      showSection('traffic');
-      if (!document.querySelector("#trafficChart").innerHTML.trim()) {
-        loadTrafficChart();
-      }
-    }
+    activeUsersChart.data.labels.push(now);
+    activeUsersChart.data.datasets[0].data.push(count);
+    activeUsersChart.update();
+  });
 
-    // Load ApexCharts for traffic data
-    async function loadTrafficChart() {
-      try {
-        const res = await fetch('/analytics/traffic-data');
-        const data = await res.json();
-
-        const formattedData = data.map(d => ({
-          x: new Date(d.timestamp).toLocaleTimeString(),
-          y: d.count
-        }));
-
-        const options = {
-          chart: { type: 'area', height: 350, toolbar: { show: false }, foreColor: '#333' },
-          series: [{ name: 'Active Users', data: formattedData }],
-          xaxis: { type: 'category', title: { text: 'Time' } },
-          yaxis: { title: { text: 'Users' }, min: 0 },
-          stroke: { curve: 'smooth' },
-          tooltip: {
-            x: { format: 'HH:mm:ss' }
-          },
-          colors: ['#22c55e']
-        };
-
-        const chart = new ApexCharts(document.querySelector("#trafficChart"), options);
-        chart.render();
-      } catch (err) {
-        console.error('Failed to load traffic chart', err);
-      }
-    }
-
-    // Show Dashboard by default
-    window.addEventListener('DOMContentLoaded', () => {
-      showSection('Dashboard');
+  // Section display logic
+  function showSection(id) {
+    document.querySelectorAll('.section').forEach(section => {
+      section.classList.add('hidden');
     });
-  </script>
+    document.getElementById(id).classList.remove('hidden');
+  }
+
+  // Load Dashboard by default
+  window.addEventListener('DOMContentLoaded', () => {
+    showSection('Dashboard');
+  });
+</script>
+
 </body>
 
 </html>

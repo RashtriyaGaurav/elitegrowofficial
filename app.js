@@ -21,6 +21,8 @@ const ActiveUser = require('./models/activeUserModel');
 
 // Routes
 const index = require('./routes/index');
+const analytics = require('./routes/analytics');
+const auth = require('./routes/auth');
 
 // Middleware
 app.use(express.static(path.join(__dirname, 'public')));
@@ -30,6 +32,8 @@ app.use(express.urlencoded({ extended: true }));
 app.set('view engine', 'ejs');
 
 app.use('/', index);
+app.use('/analytics', analytics);
+app.use('/auth', auth);
 
 // --- Active User Tracking ---
 let activeUsers = 0;
