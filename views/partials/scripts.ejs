@@ -16,6 +16,15 @@
       window.history.replaceState({}, document.title, cleanURL);
     }, 3000);
   }
+
+    window.addEventListener('DOMContentLoaded', () => {
+    const body = document.body;
+    // Trigger reflow to ensure transition applies
+    requestAnimationFrame(() => {
+      body.classList.remove('opacity-0', 'scale-95');
+      body.classList.add('opacity-100', 'scale-100');
+    });
+  });
 </script>
 </body>
 </html>

@@ -20,6 +20,7 @@ mongoose.connect(`${process.env.MONGODB_URI}/EliteGrow`, {
 const index = require('./routes/index');
 const analytics = require('./routes/analytics');
 const auth = require('./routes/auth');
+const upload = require('./routes/upload');
 
 // Middleware
 app.use(express.static(path.join(__dirname, 'public')));
@@ -31,6 +32,7 @@ app.set('view engine', 'ejs');
 app.use('/', index);
 app.use('/analytics', analytics);
 app.use('/auth', auth);
+app.use('/upload', upload);
 
 // --- Active User Tracking ---
 let activeUsers = 0;

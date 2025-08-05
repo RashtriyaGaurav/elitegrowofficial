@@ -4,13 +4,15 @@ const itemModel = require('../models/itemModel');
 const multer = require('multer');
 const User = require('../models/userModel');
 // const { generateToken } = require('../utils/generateToken');
+const { isValue } = require('../middlewares/isValue');
 const jwt = require('jsonwebtoken');
 const storage = multer.memoryStorage();
 const upload = multer({ storage: storage });
 // const ActiveUser = require('../models/activeUserModel');
 // const Contact = require('../models/contactModel');
 
-router.get('/createItem', async function (req, res) {
+
+router.get('/createItem',isValue , async function (req, res) {
   res.render('createItem');
 })
 
