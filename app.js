@@ -16,11 +16,10 @@ mongoose.connect(`${process.env.MONGODB_URI}/EliteGrow`, {
 }).then(() => console.log('MongoDB connected'))
   .catch((err) => console.error('MongoDB error:', err));
 
-// Model
-const ActiveUser = require('./models/activeUserModel');
-
 // Routes
 const index = require('./routes/index');
+const analytics = require('./routes/analytics');
+const auth = require('./routes/auth');
 
 // Middleware
 app.use(express.static(path.join(__dirname, 'public')));
@@ -30,6 +29,8 @@ app.use(express.urlencoded({ extended: true }));
 app.set('view engine', 'ejs');
 
 app.use('/', index);
+app.use('/analytics', analytics);
+app.use('/auth', auth);
 
 // --- Active User Tracking ---
 let activeUsers = 0;
@@ -37,23 +38,15 @@ let activeUsers = 0;
 io.on('connection', (socket) => {
   activeUsers++;
   io.emit('updateActiveUsers', activeUsers);
-  logActiveUsersToDB(activeUsers);
 
   socket.on('disconnect', () => {
     activeUsers = Math.max(0, activeUsers - 1);
     io.emit('updateActiveUsers', activeUsers);
-    logActiveUsersToDB(activeUsers);
   });
 });
-
-// --- Save active user count to DB ---
-function logActiveUsersToDB(count) {
-  const record = new ActiveUser({ count });
-  record.save().catch(err => console.error('Error saving active user count:', err));
-}
 
 // --- Server Start ---
 const PORT = process.env.PORT || 3000;
 http.listen(PORT, () => {
-  console.log(`Server is running on http://localhost:${PORT}`);
+  // console.log(`Server is running on http://localhost:${PORT}`);
 });
