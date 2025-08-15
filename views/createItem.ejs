@@ -1,4 +1,4 @@
-<%- include('partials/head', { title: "Create Item" }) %>
+<%- include('partials/head', { title: "Create Item |" }) %>
 <%- include('partials/navbar') %>
 
 <body class="bg-black text-white min-h-screen">
@@ -30,7 +30,7 @@
 
       <!-- Item Name -->
       <div>
-        <label for="itemName" class="block mb-1 text-sm text-gray-300">Item Name</label>
+        <label for="itemName" class="block mb-1 text-sm text-gray-300">Item Name<span class="text-red-500">*</span> </label>
         <input type="text" id="itemName" name="itemName" placeholder="Enter item name"
           class="w-full bg-zinc-900 border border-zinc-600 text-white p-2 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
           required />
@@ -38,17 +38,20 @@
 
       <!-- Item Link -->
       <div>
-        <label for="itemLink" class="block mb-1 text-sm text-gray-300">Item Link</label>
+        <label for="itemLink" class="block mb-1 text-sm text-gray-300">Item Link<span class="text-green-500">*</span></label>
         <input type="text" id="itemLink" name="itemLink" placeholder="https://example.com/item"
           class="w-full bg-zinc-900 border border-zinc-600 text-white p-2 rounded focus:outline-none focus:ring-2 focus:ring-blue-500" />
       </div>
 
       <!-- Item Path -->
       <div>
-        <label for="itemPath" class="block mb-1 text-sm text-gray-300">Item Path</label>
+        <label for="itemPath" class="block mb-1 text-sm text-gray-300">Item Path<span class="text-green-500">*</span></label>
         <input type="text" id="itemPath" name="itemPath" placeholder="/path/to/item"
           class="w-full bg-zinc-900 border border-zinc-600 text-white p-2 rounded focus:outline-none focus:ring-2 focus:ring-blue-500" />
       </div>
+
+      <!-- Item Description -->
+       <h1 class="px-1 text-sm">You have to choose one of them only<span class="text-green-500">*</span></h1>
 
       <!-- Submit -->
       <div>

@@ -18,13 +18,13 @@ router.get('/', isValue, async function (req, res) {
   res.render('index', { items, value: req.value });
 });
 
-router.get('/capcutapk/:id', async function (req, res) {
+router.get('/capcutapk/:id',isValue, async function (req, res) {
   const itemId = req.params.id;
   await itemModel.findOneAndUpdate(
     { _id: itemId },
     { $inc: { clicks: 1 } }
   );
-  res.render('capcut');
+  res.render('capcut',{value: req.value});
 })
 
 router.get('/item/:id', async function (req, res) {

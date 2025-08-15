@@ -1,49 +1,66 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EliteGrow | Authentication</title>
-    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-    <link rel="stylesheet" href="/style.css">
-</head>
-<body class="min-h-screen flex flex-col items-center justify-center">
 
-  <div id="messageBox"
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>EliteGrow | Register</title>
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+
+  <link rel="stylesheet" href="/style.css" />
+</head>
+
+<body class="min-h-screen bg-zinc-900 flex flex-col items-center justify-center text-white px-4">
+
+  <!-- Success Box -->
+ <div id="messageBox"
     class="hidden fixed top-5  bg-green-100 border border-green-300 text-green-700 px-4 py-2 rounded shadow">
     <span id="messageText"></span>
   </div>
 
-    <h2 class="text-3xl font-bold  mb-6 text-left">Register</h2>
+  <!-- Form Card -->
+  <div class="w-full max-w-md bg-zinc-800/50 backdrop-blur-md rounded-2xl p-8 border border-zinc-700">
+    <h2 class="text-3xl font-bold text-center mb-6">Sign Up to <span class="text-blue-500">EliteGrow</span></h2>
 
-    <form class="space-y-4" action="/auth/form/register" method="POST">
+    <form action="/auth/form/register" method="POST" class="space-y-5">
+      <!-- Name -->
       <div>
-        <label class="block mb-1 mx-1 text-sm" for="email">Name</label>
-        <input id="text" type="text" name="name" class="text-black w-full px-4 py-2 rounded-lg bg-zinc-100 border border-black/10 placeholder-black/10 focus:outline-none focus:ring-2 focus:ring-white" placeholder="Tung Tung Sahur" required>
+        <label for="name" class="block mb-1 text-sm font-medium">Name</label>
+        <input id="text" type="text" name="name" required placeholder="Tung Tung Sahur"
+          class="w-full px-4 py-2 bg-zinc-100 text-black rounded-lg border border-zinc-300 placeholder-black/50 focus:outline-none focus:ring-2 focus:ring-blue-500" />
       </div>
+      <!-- Email -->
       <div>
-        <label class="block mb-1 mx-1 text-sm" for="email">Email</label>
-        <input id="email" type="email" name="email" class="text-black w-full px-4 py-2 rounded-lg bg-zinc-100 border border-black/10 placeholder-black/10 focus:outline-none focus:ring-2 focus:ring-white" placeholder="you@example.com" required>
+        <label for="email" class="block mb-1 text-sm font-medium">Email</label>
+        <input id="email" name="email" type="email" required placeholder="tungtungsahur@example.com"
+          class="w-full px-4 py-2 bg-zinc-100 text-black rounded-lg border border-zinc-300 placeholder-black/50 focus:outline-none focus:ring-2 focus:ring-blue-500" />
       </div>
 
+      <!-- Password -->
       <div>
-        <label class="block mb-1 mx-1 text-sm" for="password">Password</label>
-        <input id="password" type="password" name="password" class="text-black w-full px-4 py-2 rounded-lg bg-zinc-100 border border-black/10 placeholder-black/10 focus:outline-none focus:ring-2 focus:ring-white" placeholder="••••••••" required>
+        <label for="password" class="block mb-1 text-sm font-medium">Password</label>
+        <input id="password" name="password" type="password" required placeholder="••••••••"
+          class="w-full px-4 py-2 bg-zinc-100 text-black rounded-lg border border-zinc-300 placeholder-black/50 focus:outline-none focus:ring-2 focus:ring-blue-500" />
       </div>
 
-      <button type="submit" class="w-full bg-blue-500 font-semibold py-2 rounded-lg hover:scale-105 transition duration-300">
-        Sign Up
+      <!-- Submit Button -->
+      <button type="submit"
+        class="w-full bg-blue-600 text-white font-semibold py-2 rounded-lg hover:bg-blue-700 transition duration-300 hover:scale-[1.02]">
+         Sign Up
       </button>
     </form>
 
-    <p class="text-center text-sm mt-4">Already have an account?
-      <a href="/auth/login" class="text-blue-500 underline hover:text-blue-700">login</a>
+    <p class="text-center text-sm mt-6 text-zinc-300">
+     Already have an account?
+      <a href="/auth/login" class="text-blue-500 hover:underline">Login</a>
     </p>
+  </div>
 
-     <script src="/socket.io/socket.io.js"></script>
+  <!-- JS -->
+  <script src="/socket.io/socket.io.js"></script>
   <script>
     const socket = io();
-       const urlParams = new URLSearchParams(window.location.search);
+    const urlParams = new URLSearchParams(window.location.search);
     const message = urlParams.get('message');
 
     if (message) {
@@ -62,9 +79,7 @@
         window.history.replaceState({}, document.title, cleanURL);
       }, 3000);
     }
-    </script>
-  
-<body>
+  </script>
 
 </body>
 

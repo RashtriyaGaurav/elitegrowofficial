@@ -13,7 +13,7 @@ const upload = multer({ storage: storage });
 
 
 router.get('/createItem',isValue , async function (req, res) {
-  res.render('createItem');
+  res.render('createItem' , { value: req.value });
 })
 
 router.get('/item/:id', async function (req, res) {

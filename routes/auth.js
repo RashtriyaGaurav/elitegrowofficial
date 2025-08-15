@@ -41,7 +41,7 @@ router.post('/form/register', async (req, res) => {
   const { name, email, password } = req.body;
   try {
     const user = await User.findOne({ email });
-    if (user) return res.redirect('/register?message=Email%20already%20exists');
+    if (user) return res.redirect('/auth/register?message=Email%20already%20exists');
 
     let useR = await User.create({ name, email, password });
     let token = generateToken(useR);
@@ -54,7 +54,7 @@ router.post('/form/register', async (req, res) => {
 
     res.redirect('/?message=Registered%20successfully');
   } catch (err) {
-    res.redirect('/register?message=Something%20went%20wrong');
+    res.redirect('/auth/register?message=Something%20went%20wrong');
   }
 });
 
