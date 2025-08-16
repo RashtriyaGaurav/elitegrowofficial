@@ -61,7 +61,7 @@ router.post('/createItem', upload.single('itemImage'), async function (req, res)
     itemPath
 
   });
-  res.redirect('/createItem');
+  res.redirect('createItem');
 });
 
 module.exports = router;

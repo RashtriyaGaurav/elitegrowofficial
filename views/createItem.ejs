@@ -1,4 +1,12 @@
-<%- include('partials/head', { title: "Create Item | EliteGrow" }) %>
+<%- include('partials/head', { 
+  title: "Create Item | EliteGrow",
+  description: "Upload your creative assets to EliteGrow. Share your tools, templates, and resources with the community.",
+  keywords: "EliteGrow, create item, upload assets, creative tools, templates, resources, developers, designers, creators", 
+  ogTitle: "Create Item | EliteGrow",
+  ogDescription: "Share your creative assets with the EliteGrow community. Upload tools, templates, and resources to help others in their digital journey.",
+  ogImage: "/images/EliteGrowLogo.png", 
+  ogUrl: "/createItem" 
+}) %>
 <%- include('partials/navbar') %>
 
 <body class="bg-black text-white min-h-screen">
@@ -17,7 +25,7 @@
       class="w-[80vw] sm:w-[40vw] max-w-md rounded-lg shadow-xl mb-8 hidden border border-zinc-700" />
 
     <!-- Upload Form -->
-    <form action="/createItem" method="POST" enctype="multipart/form-data"
+    <form action="/upload/createItem" method="POST" enctype="multipart/form-data"
       class="w-full max-w-md bg-zinc-800/50 p-6 rounded-xl border border-zinc-700 shadow-xl space-y-5 backdrop-blur-sm">
 
       <!-- Image Upload -->

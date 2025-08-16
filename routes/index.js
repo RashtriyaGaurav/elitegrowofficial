@@ -124,6 +124,10 @@ router.get('/terms-and-conditions', isValue, async function (req, res) {
   res.render('terms', { value: req.value });
 })
 
+router.get("/blog/:slug", isValue,(req, res) => {
+  const slug = req.params.slug;
+  res.render(`blogs/${slug}` , { value: req.value ,capcut: { _id: "688a4acfb0d8793983c851ac" } }); // Replace with actual CapCut item ID
+});
 
 
 module.exports = router;

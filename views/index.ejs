@@ -24,7 +24,7 @@
     </div>
 
     <!-- page-2 -->
-    <div class=" pb-10 bg-black/30 w-full ">
+    <div class=" pb-10 bg-black/30 rounded-2xl max-w-6xl mx-auto ">
       <h1 style="font-family: 'Google Sans Code';" class="sm:px-12 px-7 py-5 text-2xl sm:text-[3.5vw] font-semibold">Our
         Asset Library</h1>
 
@@ -39,7 +39,7 @@
                     src="data:image/jpeg;base64,<%= item.itemImage.toString('base64') %>" alt="">
                 </div>
                 <div class="flex flex-col pb-2 px-2 pt-1">
-                  <h1 class="text-lg sm:text-xl ">
+                  <h1 class="text-lg ">
                     <%= item.itemName %>
                   </h1>
                 </div>
@@ -52,7 +52,7 @@
                       src="data:image/jpeg;base64,<%= item.itemImage.toString('base64') %>" alt="">
                   </div>
                   <div class="flex flex-col pb-2 px-2 pt-1">
-                    <h1 class="text-lg sm:text-xl">
+                    <h1 class="text-lg">
                       <%= item.itemName %>
                     </h1>
                   </div>
@@ -62,6 +62,44 @@
         </div>
       </div>
     </div>
+
+    <!-- Latest Blogs Section -->
+<section class="py-20 px-6 sm:px-12 max-w-6xl mx-auto">
+  <h2 class="text-2xl sm:text-[3.5vw] font-semibold mb-8 text-white" style="font-family: 'Google Sans Code';">Latest Blogs</h2>
+  
+ <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
+  <!-- Blog 1 -->
+  <a href="/blog/capcut-vs-premiere" class="bg-zinc-800/50 p-5 rounded-xl hover:scale-105 transition duration-300 flex flex-col">
+    <img src="/images/capcut-premiere.png" alt="CapCut vs Adobe Premiere Pro" class="mb-4 rounded-lg object-cover w-full">
+    <h3 class="text-lg font-semibold text-white mb-2">CapCut vs Adobe Premiere Pro: Can a Free App Beat a Pro Editor?</h3>
+    <p class="text-gray-400 text-sm">I share why I personally use CapCut for quick edits, while Premiere Pro is powerful for pros. Find which one fits your workflow best.</p>
+  </a>
+
+  <!-- Blog 2 -->
+  <a href="/blog/top-10-video-editing-apps" class="bg-zinc-800/50 p-5 rounded-xl hover:scale-105 transition duration-300 flex flex-col">
+    <img src="/images/top-10-video-editing-apps.png" alt="Top 10 Free Video Editing Apps" class="mb-4 rounded-lg object-cover w-full">
+    <h3 class="text-lg font-semibold text-white mb-2">Top 10 Free Video Editing Apps Better Than CapCut (2025 Edition)</h3>
+    <p class="text-gray-400 text-sm">InShot for beginners, VN for medium-level edits, and more apps I recommend depending on your needs and specs.</p>
+  </a>
+
+  <!-- Blog 3 -->
+  <a href="/blog/top-5-free-ai-tools" class="bg-zinc-800/50 p-5 rounded-xl hover:scale-105 transition duration-300 flex flex-col">
+    <img src="/images/top-5-ai-tools.png" alt="Top 5 Free AI Tools Every Creator Should Use" class="mb-4 rounded-lg object-cover w-full">
+    <h3 class="text-lg font-semibold text-white mb-2">Top 5 Free AI Tools Every Creator Should Use in 2025</h3>
+    <p class="text-gray-400 text-sm">I share my favorite free AI tools like Canva AI and ChatGPT that help creators save time and boost creativity.</p>
+  </a>
+
+  <!-- Add more blog cards here -->
+</div>
+
+
+  <div class="text-center mt-8">
+    <a href="/blog" class="inline-block bg-blue-600 text-white font-semibold px-6 py-3 rounded-full hover:scale-105 transition duration-300">
+      View All Blogs
+    </a>
+  </div>
+</section>
+
 
     <!-- page-3 -->
     <!-- <div class="w-full  py-10">
