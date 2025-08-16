@@ -1,15 +1,44 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
-  <title><%= title %> EliteGrow</title>
+  <title><%= title %></title>
+
+  <!-- ✅ SEO Meta Tags -->
+  <meta name="description" content="<%= description %>">
+  <meta name="keywords" content="<%= keywords %>">
+  <meta name="author" content="EliteGrow">
+
+  <!-- ✅ Open Graph / Facebook -->
+  <meta property="og:title" content="<%= ogTitle || title %> EliteGrow">
+  <meta property="og:description" content="<%= ogDescription || description %>">
+  <meta property="og:image" content="<%= ogImage || '/images/EliteGrowLogo.png' %>">
+  <meta property="og:url" content="<%= ogUrl || (req ? req.protocol + '://' + req.get('host') + req.originalUrl : '') %>">
+  <meta property="og:type" content="website">
+
+  <!-- ✅ Twitter Cards -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="<%= ogTitle || title %> EliteGrow">
+  <meta name="twitter:description" content="<%= ogDescription || description %>">
+  <meta name="twitter:image" content="<%= ogImage || '/images/EliteGrowLogo.png' %>">
+
+  <!-- ✅ Mobile Friendly -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Tailwind -->
   <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
   <link rel="stylesheet" href="/style.css">
   <link rel="shortcut icon" href="/images/grow-modified.png" type="image/x-icon">
+
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Google+Sans+Code:ital,wght@0,300..800;1,300..800&family=Public+Sans:ital,wght@0,100..900;1,100..900&display=swap');
     body::-webkit-scrollbar { display: none; }
   </style>
+
+  <!-- ✅ Google AdSense -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2179785225331533"
+    crossorigin="anonymous"></script>
 </head>
+
 <body style="font-family: 'Public Sans';" class="bg-zinc-900 text-white">

@@ -1,44 +1,55 @@
-<%- include('partials/head', { title: "About |" }) %>
-<%- include('partials/navbar') %>
+<%- include('partials/head', { title: "About Us | EliteGrow" ,
+  description: "Learn about EliteGrow’s mission, vision, and what makes us the best platform for developers, designers, and creators."
+  , keywords: "EliteGrow, About EliteGrow, mission, vision, digital assets, creative tools" , ogTitle: "About EliteGrow"
+  , ogDescription: "Discover EliteGrow’s story, mission, and why creators choose us." ,
+  ogImage: "/images/EliteGrowLogo.png" , ogUrl: "/about" }) %>
 
-  <!-- about content -->
-  <section class="pt-32 px-6 sm:px-12 max-w-5xl mx-auto">
-    <h1 class="text-4xl sm:text-5xl font-bold mb-6" style="font-family: 'Google Sans Code';">About <br> Elite<span class="text-blue-500">Grow</span></h1>
-    <p class="text-gray-300 text-lg leading-relaxed">
-      EliteGrow is your one-stop creative asset platform designed to empower developers, designers, and content creators. We believe in simplifying the way creative professionals find tools, templates, and resources.
-    </p>
+  <%- include('partials/navbar') %>
 
-    <div class="mt-10 grid grid-cols-1 sm:grid-cols-2 gap-10">
-      <div>
-        <h2 class="text-2xl font-semibold mb-2 text-white">Our Mission</h2>
+    <!-- about content -->
+    <section class="pt-32 px-6 sm:px-12 max-w-5xl mx-auto">
+      <h1 class="text-4xl sm:text-5xl font-bold mb-6" style="font-family: 'Google Sans Code';">About <br> Elite<span
+          class="text-blue-500">Grow</span></h1>
+      <p class="text-gray-300 text-lg leading-relaxed">
+        EliteGrow is your one-stop creative asset platform designed to empower developers, designers, and content
+        creators. We believe in simplifying the way creative professionals find tools, templates, and resources.
+      </p>
+
+      <div class="mt-10 grid grid-cols-1 sm:grid-cols-2 gap-10">
+        <div>
+          <h2 class="text-2xl font-semibold mb-2 text-white">Our Mission</h2>
+          <p class="text-gray-400 text-base leading-relaxed">
+            We aim to democratize access to high-quality digital assets by building a platform that’s open,
+            collaborative, and constantly evolving. Whether you’re building a product, launching a startup, or just
+            starting your journey, we want EliteGrow to support your vision.
+          </p>
+        </div>
+        <div>
+          <h2 class="text-2xl font-semibold mb-2 text-white">What We Offer</h2>
+          <ul class="text-gray-400 list-disc list-inside text-base space-y-1">
+            <li>Free & premium community-contributed assets</li>
+            <!-- <li>Real-time analytics for your uploads</li> -->
+            <li>Modern, responsive design optimized for performance</li>
+            <li>Easy-to-use and sharing experience</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="mt-12">
+        <h2 class="text-2xl font-semibold mb-2 text-white">Why Choose EliteGrow?</h2>
         <p class="text-gray-400 text-base leading-relaxed">
-          We aim to democratize access to high-quality digital assets by building a platform that’s open, collaborative, and constantly evolving. Whether you’re building a product, launching a startup, or just starting your journey, we want EliteGrow to support your vision.
+          With no hidden charges, EliteGrow gives you the freedom to get free assets without worrying about costs. Our
+          platform is designed to be user-friendly, so you can focus on what matters most – your project.
         </p>
       </div>
-      <div>
-        <h2 class="text-2xl font-semibold mb-2 text-white">What We Offer</h2>
-        <ul class="text-gray-400 list-disc list-inside text-base space-y-1">
-          <li>Free & premium community-contributed assets</li>
-          <!-- <li>Real-time analytics for your uploads</li> -->
-          <li>Modern, responsive design optimized for performance</li>
-          <li>Easy-to-use and sharing experience</li>
-        </ul>
+
+      <div class="mt-12 text-center">
+        <a href="/contact"
+          class="bg-blue-600 px-6 py-3 rounded-full text-white font-semibold hover:scale-105 transition duration-300 inline-block">
+          Have any issue?
+        </a>
       </div>
-    </div>
+    </section>
 
-    <div class="mt-12">
-      <h2 class="text-2xl font-semibold mb-2 text-white">Why Choose EliteGrow?</h2>
-      <p class="text-gray-400 text-base leading-relaxed">
-        With no hidden charges, EliteGrow gives you the freedom to get free assets without worrying about costs. Our platform is designed to be user-friendly, so you can focus on what matters most – your project.
-      </p>
-    </div>
-
-    <div class="mt-12 text-center">
-      <a href="/contact" class="bg-blue-600 px-6 py-3 rounded-full text-white font-semibold hover:scale-105 transition duration-300 inline-block">
-        Have any issue?
-      </a>
-    </div>
-  </section>
-
- <%- include('partials/footer') %>
-<%- include('partials/scripts') %>
+    <%- include('partials/footer') %>
+      <%- include('partials/scripts') %>

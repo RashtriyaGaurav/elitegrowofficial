@@ -19,42 +19,56 @@
   </div>
 
   <!-- Form Card -->
-  <div class="w-full max-w-md bg-zinc-800/50 backdrop-blur-md rounded-2xl p-8 border border-zinc-700">
-    <h2 class="text-3xl font-bold text-center mb-6">Sign Up to <span class="text-blue-500">EliteGrow</span></h2>
+<div class="w-full max-w-md bg-zinc-800/50 backdrop-blur-md rounded-2xl p-8 border border-zinc-700">
+  <h2 class="text-3xl font-bold text-center mb-6">
+    Sign Up to <span class="text-blue-500">EliteGrow</span>
+  </h2>
 
-    <form action="/auth/form/register" method="POST" class="space-y-5">
-      <!-- Name -->
-      <div>
-        <label for="name" class="block mb-1 text-sm font-medium">Name</label>
-        <input id="text" type="text" name="name" required placeholder="Tung Tung Sahur"
-          class="w-full px-4 py-2 bg-zinc-100 text-black rounded-lg border border-zinc-300 placeholder-black/50 focus:outline-none focus:ring-2 focus:ring-blue-500" />
-      </div>
-      <!-- Email -->
-      <div>
-        <label for="email" class="block mb-1 text-sm font-medium">Email</label>
-        <input id="email" name="email" type="email" required placeholder="tungtungsahur@example.com"
-          class="w-full px-4 py-2 bg-zinc-100 text-black rounded-lg border border-zinc-300 placeholder-black/50 focus:outline-none focus:ring-2 focus:ring-blue-500" />
-      </div>
+  <form action="/auth/form/register" method="POST" class="space-y-5">
+    <!-- Name -->
+    <div>
+      <label for="name" class="block mb-1 text-sm font-medium">Name</label>
+      <input id="text" type="text" name="name" required placeholder="Tung Tung Sahur"
+        class="w-full px-4 py-2 bg-zinc-100 text-black rounded-lg border border-zinc-300 placeholder-black/50 focus:outline-none focus:ring-2 focus:ring-blue-500" />
+    </div>
 
-      <!-- Password -->
-      <div>
-        <label for="password" class="block mb-1 text-sm font-medium">Password</label>
-        <input id="password" name="password" type="password" required placeholder="••••••••"
-          class="w-full px-4 py-2 bg-zinc-100 text-black rounded-lg border border-zinc-300 placeholder-black/50 focus:outline-none focus:ring-2 focus:ring-blue-500" />
-      </div>
+    <!-- Email -->
+    <div>
+      <label for="email" class="block mb-1 text-sm font-medium">Email</label>
+      <input id="email" name="email" type="email" required placeholder="tungtungsahur@example.com"
+        class="w-full px-4 py-2 bg-zinc-100 text-black rounded-lg border border-zinc-300 placeholder-black/50 focus:outline-none focus:ring-2 focus:ring-blue-500" />
+    </div>
 
-      <!-- Submit Button -->
-      <button type="submit"
-        class="w-full bg-blue-600 text-white font-semibold py-2 rounded-lg hover:bg-blue-700 transition duration-300 hover:scale-[1.02]">
-         Sign Up
-      </button>
-    </form>
+    <!-- Password -->
+    <div>
+      <label for="password" class="block mb-1 text-sm font-medium">Password</label>
+      <input id="password" name="password" type="password" required placeholder="••••••••"
+        class="w-full px-4 py-2 bg-zinc-100 text-black rounded-lg border border-zinc-300 placeholder-black/50 focus:outline-none focus:ring-2 focus:ring-blue-500" />
+    </div>
 
-    <p class="text-center text-sm mt-6 text-zinc-300">
-     Already have an account?
-      <a href="/auth/login" class="text-blue-500 hover:underline">Login</a>
-    </p>
-  </div>
+    <!-- Accept Terms Checkbox -->
+    <div class="flex items-center space-x-2">
+      <input id="terms" name="terms" type="checkbox" required
+        class="w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500" />
+      <label for="terms" class="text-sm text-zinc-300">
+        I agree to the <a href="/terms-and-conditions" class="text-blue-500 hover:underline">Terms</a> and
+        <a href="/privacy" class="text-blue-500 hover:underline">Privacy Policy</a>.
+      </label>
+    </div>
+
+    <!-- Submit Button -->
+    <button type="submit"
+      class="w-full bg-blue-600 text-white font-semibold py-2 rounded-lg hover:bg-blue-700 transition duration-300 hover:scale-[1.02]">
+      Sign Up
+    </button>
+  </form>
+
+  <p class="text-center text-sm mt-6 text-zinc-300">
+    Already have an account?
+    <a href="/auth/login" class="text-blue-500 hover:underline">Login</a>
+  </p>
+</div>
+
 
   <!-- JS -->
   <script src="/socket.io/socket.io.js"></script>

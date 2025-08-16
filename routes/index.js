@@ -118,6 +118,12 @@ router.get('/about', isValue, async function (req, res) {
   res.render('about', { value: req.value });
 })
 
+router.get('/terms-and-conditions', isValue, async function (req, res) {
+
+
+  res.render('terms', { value: req.value });
+})
+
 
 
 module.exports = router;

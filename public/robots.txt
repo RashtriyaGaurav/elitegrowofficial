@@ -1,0 +1,7 @@
+User-agent: *
+Disallow: /admin/
+Disallow: /login
+Disallow: /register
+Allow: /
+
+Sitemap: https://elitegrowofficial.onrender.com/sitemap.xml
