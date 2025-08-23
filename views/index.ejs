@@ -1,12 +1,9 @@
-<%- include('partials/head', { 
-  title: "EliteGrow — Free Creative Assets, Tools & Resources",
-  description: "EliteGrow is the ultimate platform for developers, designers, and creators. Explore free creative assets, templates, and tools to grow your digital journey.",
-  keywords: "EliteGrow, free assets, creative tools, templates, resources, developers, designers, creators",
-  ogTitle: "EliteGrow — Free Creative Assets, Tools & Resources",
-  ogDescription: "Discover EliteGrow’s library of free assets, tools, and templates. Join our community of developers, designers, and creators to grow your skills and projects.",
-  ogImage: "/images/EliteGrowLogo.png",
-  ogUrl: "/"
-}) %>
+<%- include('partials/head', { title: "EliteGrow — Free Creative Assets, Tools & Resources" ,
+  description: "EliteGrow is the ultimate platform for developers, designers, and creators. Explore free creative assets, templates, and tools to grow your digital journey."
+  , keywords: "EliteGrow, free assets, creative tools, templates, resources, developers, designers, creators" ,
+  ogTitle: "EliteGrow — Free Creative Assets, Tools & Resources" ,
+  ogDescription: "Discover EliteGrow’s library of free assets, tools, and templates. Join our community of developers, designers, and creators to grow your skills and projects."
+  , ogImage: "/images/EliteGrowLogo.png" , ogUrl: "/" }) %>
 
   <%- include('partials/navbar') %>
 
@@ -24,77 +21,112 @@
     </div>
 
     <!-- page-2 -->
-    <div class=" pb-10 bg-black/30 rounded-2xl max-w-6xl mx-auto ">
+    <div class=" pb-10 bg-black/30 rounded-2xl max-w-7xl mx-auto ">
       <h1 style="font-family: 'Google Sans Code';" class="sm:px-12 px-7 py-5 text-2xl sm:text-[3.5vw] font-semibold">Our
         Asset Library</h1>
 
       <div class="p-5">
-        <div class="flex flex-wrap gap-6 sm:gap-8 md:gap-10 w-full px-4 ">
-          <% items.slice().reverse().forEach(function(item) { %>
-            <% if(item.itemPath) { %>
-              <a href="<%= item.itemPath %>/<%= item._id %>"
-                class="w-full sm:w-[48%] md:w-[30%] lg:w-[22%] hover:scale-105 transition duration-300 rounded-lg overflow-hidden flex flex-col border border-zinc-600">
-                <div class="aspect-video overflow-hidden">
-                  <img class="w-full h-full object-cover"
-                    src="data:image/jpeg;base64,<%= item.itemImage.toString('base64') %>" alt="">
-                </div>
-                <div class="flex flex-col pb-2 px-2 pt-1">
-                  <h1 class="text-lg ">
-                    <%= item.itemName %>
-                  </h1>
-                </div>
-              </a>
-              <% } else { %>
-                <a href="item/<%= item._id %>" target="_blank"
-                  class="w-full sm:w-[48%] md:w-[30%] lg:w-[22%] hover:scale-105 transition duration-300 rounded-lg overflow-hidden flex flex-col border border-zinc-600">
-                  <div class="aspect-video overflow-hidden">
-                    <img class="w-full h-full object-cover"
-                      src="data:image/jpeg;base64,<%= item.itemImage.toString('base64') %>" alt="">
-                  </div>
-                  <div class="flex flex-col pb-2 px-2 pt-1">
-                    <h1 class="text-lg">
-                      <%= item.itemName %>
-                    </h1>
-                  </div>
-                </a>
-                <% } %>
-                  <% }); %>
-        </div>
-      </div>
+  <div class="flex flex-wrap gap-4 sm:gap-8 md:gap-4 w-full px-4 ">
+    <% items.slice().reverse().forEach(function(item) { %>
+      
+      <% if(item.isAd) { %>
+        <!-- Premium Ad Card -->
+        <a href="item/<%= item._id %>" target="_blank"
+          class="w-full sm:w-[48%] md:w-[30%] lg:w-[22%] hover:scale-105 transition duration-300 flex flex-col rounded-2xl overflow-hidden shadow-xl relative bg-gradient-to-b from-gray-900/90 to-gray-800/80 backdrop-blur-sm border border-gray-700">
+
+         
+
+          <div class="aspect-video overflow-hidden">
+            <img class="w-full h-full object-cover"
+              src="data:image/jpeg;base64,<%= item.itemImage.toString('base64') %>" alt="">
+          </div>
+
+          <div class="flex flex-col pb-3 px-3 pt-2">
+            <h1 class="text-base leading-5 font-semibold text-gray-100">
+              <%= item.itemName %>
+            </h1>
+            <p class="text-xs text-gray-400 mt-1">Sponsored Content</p>
+          </div>
+        </a>
+
+      <% } else if(item.itemPath) { %>
+        <!-- Normal Item with custom path -->
+        <a href="<%= item.itemPath %>/<%= item._id %>"
+          class="w-full sm:w-[48%] md:w-[30%] lg:w-[22%] hover:scale-105 transition duration-300 flex flex-col">
+          <div class="aspect-video rounded-lg overflow-hidden">
+            <img class="w-full h-full object-cover"
+              src="data:image/jpeg;base64,<%= item.itemImage.toString('base64') %>" alt="">
+          </div>
+          <div class="flex flex-col pb-2 px-1 pt-1">
+            <h1 class="text-md leading-5 text-gray-300">
+              <%= item.itemName %>
+            </h1>
+          </div>
+        </a>
+
+      <% } else if(item.itemLink) { %>
+        <!-- Normal Item with default link -->
+        <a href="item/<%= item._id %>" target="_blank"
+          class="w-full sm:w-[48%] md:w-[30%] lg:w-[22%] hover:scale-105 transition duration-300 flex flex-col">
+          <div class="aspect-video rounded-lg overflow-hidden">
+            <img class="w-full h-full object-cover"
+              src="data:image/jpeg;base64,<%= item.itemImage.toString('base64') %>" alt="">
+          </div>
+          <div class="flex flex-col pb-2 px-1 pt-1">
+            <h1 class="text-md leading-5 text-gray-300">
+              <%= item.itemName %>
+            </h1>
+          </div>
+        </a>
+      <% } %>
+
+    <% }); %>
+  </div>
+</div>
+
     </div>
 
     <!-- Latest Blogs Section -->
-<section class="py-20 px-6 sm:px-12 max-w-6xl mx-auto">
-  <h2 class="text-2xl sm:text-[3.5vw] font-semibold mb-8 text-white" style="font-family: 'Google Sans Code';">Latest Blogs</h2>
-  
- <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
-  <!-- Blog 1 -->
-  <a href="/blog/capcut-vs-premiere" class="bg-zinc-800/50 p-5 rounded-xl hover:scale-105 transition duration-300 flex flex-col">
-    <img src="/images/capcut-premiere.png" alt="CapCut vs Adobe Premiere Pro" class="mb-4 rounded-lg object-cover w-full">
-    <h3 class="text-lg font-semibold text-white mb-2">CapCut vs Adobe Premiere Pro: Can a Free App Beat a Pro Editor?</h3>
-    <p class="text-gray-400 text-sm">I share why I personally use CapCut for quick edits, while Premiere Pro is powerful for pros. Find which one fits your workflow best.</p>
-  </a>
+    <section class="py-20 px-6 sm:px-12 max-w-7xl mx-auto">
+      <h2 class="text-2xl sm:text-[3.5vw] font-semibold mb-8 text-white" style="font-family: 'Google Sans Code';">Latest
+        Blogs</h2>
 
-  <!-- Blog 2 -->
-  <a href="/blog/top-10-video-editing-apps" class="bg-zinc-800/50 p-5 rounded-xl hover:scale-105 transition duration-300 flex flex-col">
-    <img src="/images/top-10-video-editing-apps.png" alt="Top 10 Free Video Editing Apps" class="mb-4 rounded-lg object-cover w-full">
-    <h3 class="text-lg font-semibold text-white mb-2">Top 10 Free Video Editing Apps Better Than CapCut (2025 Edition)</h3>
-    <p class="text-gray-400 text-sm">InShot for beginners, VN for medium-level edits, and more apps I recommend depending on your needs and specs.</p>
-  </a>
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
+        <!-- Blog 1 -->
+        <a href="/blog/capcut-vs-premiere"
+          class="bg-zinc-800/50 p-5 rounded-xl hover:scale-105 transition duration-300 flex flex-col">
+          <img src="/images/capcut-premiere.png" alt="CapCut vs Adobe Premiere Pro"
+            class="mb-4 rounded-lg object-cover w-full">
+          <h3 class="text-lg font-semibold text-white mb-2">CapCut vs Adobe Premiere Pro: Can a Free App Beat a Pro
+            Editor?</h3>
+          <p class="text-gray-400 text-sm">I share why I personally use CapCut for quick edits, while Premiere Pro is
+            powerful for pros. Find which one fits your workflow best.</p>
+        </a>
 
-  <!-- Blog 3 -->
-  <a href="/blog/top-5-free-ai-tools" class="bg-zinc-800/50 p-5 rounded-xl hover:scale-105 transition duration-300 flex flex-col">
-    <img src="/images/top-5-ai-tools.png" alt="Top 5 Free AI Tools Every Creator Should Use" class="mb-4 rounded-lg object-cover w-full">
-    <h3 class="text-lg font-semibold text-white mb-2">Top 5 Free AI Tools Every Creator Should Use in 2025</h3>
-    <p class="text-gray-400 text-sm">I share my favorite free AI tools like Canva AI and ChatGPT that help creators save time and boost creativity.</p>
-  </a>
+        <!-- Blog 2 -->
+        <a href="/blog/top-10-video-editing-apps"
+          class="bg-zinc-800/50 p-5 rounded-xl hover:scale-105 transition duration-300 flex flex-col">
+          <img src="/images/top-10-video-editing-apps.png" alt="Top 10 Free Video Editing Apps"
+            class="mb-4 rounded-lg object-cover w-full">
+          <h3 class="text-lg font-semibold text-white mb-2">Top 10 Free Video Editing Apps Better Than CapCut (2025
+            Edition)</h3>
+          <p class="text-gray-400 text-sm">InShot for beginners, VN for medium-level edits, and more apps I recommend
+            depending on your needs and specs.</p>
+        </a>
 
-  <!-- Add more blog cards here -->
-</div>
+        <!-- Blog 3 -->
+        <a href="/blog/top-5-free-ai-tools"
+          class="bg-zinc-800/50 p-5 rounded-xl hover:scale-105 transition duration-300 flex flex-col">
+          <img src="/images/top-5-ai-tools.png" alt="Top 5 Free AI Tools Every Creator Should Use"
+            class="mb-4 rounded-lg object-cover w-full">
+          <h3 class="text-lg font-semibold text-white mb-2">Top 5 Free AI Tools Every Creator Should Use in 2025</h3>
+          <p class="text-gray-400 text-sm">I share my favorite free AI tools like Canva AI and ChatGPT that help
+            creators save time and boost creativity.</p>
+        </a>
 
-
-
-</section>
+        <!-- Add more blog cards here -->
+      </div>
+    </section>
 
 
     <!-- page-3 -->
@@ -139,5 +171,4 @@
     </div> -->
 
     <%- include('partials/footer') %>
-
       <%- include('partials/scripts') %>

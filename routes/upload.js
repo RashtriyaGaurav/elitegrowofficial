@@ -58,7 +58,8 @@ router.post('/createItem', upload.single('itemImage'), async function (req, res)
     itemImage: req.file ? req.file.buffer : null,
     itemLink,
     itemName,
-    itemPath
+    itemPath,
+    isAd: req.body.isAd === 'on' ? true : false
 
   });
   res.redirect('createItem');

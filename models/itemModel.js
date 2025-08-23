@@ -17,7 +17,11 @@ const itemSchema = mongoose.Schema({
         default: Date.now
     },
     impressions: Number,
-    likes: Number
+    likes: Number,
+    isAd: {
+        type: Boolean,
+        default: false
+    }
 
 
 });
